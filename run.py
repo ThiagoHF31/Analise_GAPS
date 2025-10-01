@@ -91,6 +91,7 @@ def main():
         from src.data_processor import DataProcessor
         from src.outlier_analyzer import OutlierAnalyzer  
         from src.gap_analyzer import GapAnalyzer
+        from src.gap_classification_analyzer import GapClassificationAnalyzer
         from src.visualizer import Visualizer
         from src.report_generator import ReportGenerator
     except ImportError as e:
@@ -120,13 +121,18 @@ def main():
         gap_analyzer = GapAnalyzer(CONFIG)
         dados_gaps, dados_finais = gap_analyzer.analisar_gaps(dados_sem_outliers)
         
-        # 5. Geração de visualizações
-        print("\n📊 ETAPA 4: Geração de Gráficos")
+        # 5. Classificação de gaps
+        print("\n🎯 ETAPA 4: Classificação Estatística de Gaps")
+        classification_analyzer = GapClassificationAnalyzer(CONFIG)
+        gaps_classificados, metricas_classificacao = classification_analyzer.executar_analise_completa()
+        
+        # 6. Geração de visualizações
+        print("\n📊 ETAPA 5: Geração de Gráficos")
         visualizer = Visualizer(CONFIG)
         visualizer.gerar_todos_graficos(dados_diarios, dados_gaps, dados_finais)
         
-        # 6. Geração de relatório
-        print("\n📋 ETAPA 5: Geração de Relatório")
+        # 7. Geração de relatório
+        print("\n📋 ETAPA 6: Geração de Relatório")
         report_gen = ReportGenerator(CONFIG)
         report_gen.gerar_relatorio_completo(dados_diarios, dados_gaps, dados_finais)
         
@@ -138,19 +144,31 @@ def main():
         print(f"📊 Dados processados:")
         print(f"   • Dados diários: {len(dados_diarios)} dias")
         print(f"   • Gaps analisados: {len(dados_gaps) if dados_gaps is not None else 0}")
+        print(f"   • Gaps classificados: {len(gaps_classificados) if gaps_classificados is not None else 0}")
+        print(f"   • Classes criadas: {len(metricas_classificacao) if metricas_classificacao is not None else 0}")
         print(f"   • Dados finais limpos: {len(dados_finais)} dias")
         
         print(f"\n📁 Arquivos gerados:")
         print(f"   • {CONFIG['PROCESSED_DIR']}/dados_diarios.csv")
         print(f"   • {CONFIG['PROCESSED_DIR']}/gaps_analisados.csv") 
+        print(f"   • {CONFIG['PROCESSED_DIR']}/gaps_classificados.csv")
+        print(f"   • {CONFIG['PROCESSED_DIR']}/metricas_por_classe.csv")
+        print(f"   • {CONFIG['PROCESSED_DIR']}/features_para_modelo.csv")
         print(f"   • {CONFIG['PROCESSED_DIR']}/dados_limpos_finais.csv")
         print(f"   • {CONFIG['OUTPUT_DIR']}/graphs/evolucao_precos.png")
         print(f"   • {CONFIG['OUTPUT_DIR']}/graphs/analise_gaps.png")
+        print(f"   • {CONFIG['OUTPUT_DIR']}/graphs/classificacao_distribuicao.png")
+        print(f"   • {CONFIG['OUTPUT_DIR']}/graphs/classificacao_probabilidades.png")
+        print(f"   • {CONFIG['OUTPUT_DIR']}/graphs/classificacao_tempos.png")
+        print(f"   • {CONFIG['OUTPUT_DIR']}/graphs/classificacao_volatilidade.png")
         print(f"   • {CONFIG['OUTPUT_DIR']}/reports/relatorio_completo.txt")
         
         print(f"\n💡 Para usar os dados:")
         print(f"   import pandas as pd")
         print(f"   dados = pd.read_csv('{CONFIG['PROCESSED_DIR']}/dados_limpos_finais.csv')")
+        print(f"   gaps_class = pd.read_csv('{CONFIG['PROCESSED_DIR']}/gaps_classificados.csv')")
+        print(f"   metricas = pd.read_csv('{CONFIG['PROCESSED_DIR']}/metricas_por_classe.csv')")
+        print(f"   features = pd.read_csv('{CONFIG['PROCESSED_DIR']}/features_para_modelo.csv')")
         
         print(f"\n🚀 Análise finalizada! Verifique a pasta 'output/' para resultados.")
         
