@@ -1,0 +1,30 @@
+{
+  "data_analise": "2023-04-19",
+  "total_registros": 603,
+  "periodo": "15/10/2020 a 19/04/2023",
+  "sinais": {
+    "compras": 12,
+    "vendas": 12,
+    "frequencia_pct": 3.9800995024875623
+  },
+  "big_players": {
+    "dias_detectados": 31,
+    "multiplicador_volume": 1.428955132717803,
+    "impacto_medio_pontos": 1776.4516129032259,
+    "direcao_alta_pct": 48.38709677419355
+  },
+  "distribuicao_retornos": {
+    "retorno_medio_pct": 0.021955356498047036,
+    "volatilidade_pct": 1.4785009845337018,
+    "dias_alta_pct": 50.66445182724253,
+    "dias_baixa_pct": 49.00332225913621,
+    "maior_ganho_pct": 6.866288074341775,
+    "maior_perda_pct": -5.599099294158405
+  },
+  "graficos_salvos": [
+    "output/graphs/trading/01_precos_sinais_suporte_resistencia.png",
+    "output/graphs/trading/02_rsi_analise_forca_relativa.png",
+    "output/graphs/trading/03_macd_convergencia_divergencia.png",
+    "output/graphs/trading/04_volume_profile_big_players.png"
+  ]
+}
