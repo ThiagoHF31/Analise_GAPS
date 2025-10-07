@@ -1,0 +1,9 @@
+{
+  "score_normalidade": 0.0,
+  "conclusao": "\u274c OS RETORNOS WIN$N N\u00c3O SEGUEM UMA DISTRIBUI\u00c7\u00c3O NORMAL",
+  "recomendacao": "Use m\u00e9todos n\u00e3o-param\u00e9tricos ou robustos",
+  "skewness": 0.23139627399366647,
+  "kurtosis": 0.9976460784388452,
+  "testes_realizados": 5,
+  "testes_favorecem_normalidade": 0
+}
